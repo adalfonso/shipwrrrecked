@@ -1,0 +1,50 @@
+body, html {
+	height: 100%;
+	width: 100%;
+}
+
+body {
+	background: #a7ddf7;
+	margin: 0;
+}
+
+.curtain {
+	height: auto;
+	position: absolute;
+	width: 100%;
+}
+
+#curtainBottom {
+	top: 44%;
+	z-index: 28;
+}
+
+#curtainMiddle {
+	top: 22%;
+	z-index: 29;
+}
+
+#curtainTop {
+	top: 0;
+	z-index: 30;
+}
+
+#dusk {
+	background: rgba(37, 35, 56, .9);
+	height: 100%;
+	position: relative;
+	width: 100%;
+	z-index: 10;
+}
+
+#sun {
+	background: #ddc66a;
+	border-radius: 100%;
+	border: 1px solid #b89507;
+	height: 20%;
+	left: 40%;
+	position: fixed;
+	top: 60%;
+	width: 20%;
+	z-index: 5;
+}
