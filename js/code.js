@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	var busy = false, 			//Indicates if an animation is currently in progress
 		curtainSpeed = 4,		//Duration in seconds for curtain opening
-		state = '1', 			//Current state in timeline. 
+		state = '1', 			//Current state in timeline.
 		$body = $('body'),
 		$closeHowTo = $('#closeHowTo'),
 		$howto = $('#howto'),
@@ -11,13 +11,13 @@ $(document).ready(function() {
 
 	$closeHowTo.click(function(){
 		$howto.fadeOut(200);
-		$body.click(sceneHandler);	
-	});	
+		$body.click(sceneHandler);
+	});
 
 	function sceneHandler() {	//Handler for scene
 		if(!busy)
 			scenes[state]();
-	};	
+	};
 
 	var scenes = {
 		//SCENE 1.0
@@ -49,7 +49,7 @@ $(document).ready(function() {
 					t1 : new TimelineMax(), //Squawkers enters stage left and story begins
 					t2 : new TimelineMax(), //Egret enters state right and converses with Squawkers
 					t3 : new TimelineMax(), //Squawkers Fire cannon and destroys Egret
-					t4 : new TimelineMax() //Lightning strikes				
+					t4 : new TimelineMax() //Lightning strikes
 				},
 				waveShift = windowWidth*.1,
 				waveSpeed = 4;
@@ -57,9 +57,10 @@ $(document).ready(function() {
 			// Do a little CSS Stuff
 			$cannonball.css({
 				bottom : ($cannonBarrel.height() - cannonBallSize.height)/2,
-				height : cannonBallSize, 
+				height : cannonBallSize,
 				width: cannonBallSize
-			});	
+			});
+
 			$cannonBarrelContainer.css('height', $cannonBarrel.height());
 			$stormCloud.left.css('left', -$stormCloud.left.width());
 			$stormCloud.right.css('right', -$stormCloud.right.width());
@@ -68,20 +69,20 @@ $(document).ready(function() {
 			preload("img/flash1.png", "img/flash2.png");
 
 			timeline.t1
-				.to($curtains.bot, curtainSpeed, {y : -(windowHeight*.44 + curtainHeight), ease: Power2.easeInOut})		 
+				.to($curtains.bot, curtainSpeed, {y : -(windowHeight*.44 + curtainHeight), ease: Power2.easeInOut})
 				.to($curtains.mid, curtainSpeed, {y : -(windowHeight*.22 + curtainHeight), ease: Power2.easeInOut}, 0)
 				.to($curtains.top, curtainSpeed, {y : -curtainHeight, ease: Power2.easeInOut}, 0)
 				.to($dusk, 4, {opacity : 0, ease:Power1.easeInOut}, 4.5)
 				.to($ship, 10, {x : -windowWidth*.6, ease: Power1.easeOut}, 4)
-				.to($ship, 2, {y : -windowHeight*.025, repeat: -1, yoyo: true, ease: Power1.easeInOut}, 4)	
+				.to($ship, 2, {y : -windowHeight*.025, repeat: -1, yoyo: true, ease: Power1.easeInOut}, 4)
 				.to($sun, 4, {y : -windowHeight*.5}, 4)
 				.to($waves.front, waveSpeed, {x : waveShift, repeat: -1, yoyo: true, ease: Power1.easeInOut}, 4)
 				.to($waves.middle, waveSpeed, {x : -waveShift, repeat: -1, yoyo: true, ease: Power1.easeInOut}, 4)
 				.to($waves.back, waveSpeed*1.2, {x : waveShift, repeat: -1, yoyo: true, ease: Power1.easeInOut}, 3.8)
-				.call(writeDialogue, ["Welcome to the story.~DThis tale begins like many other ones, with a hero. Yes, the hero is a bird pirate. His name is Captain Squawkers. No, he\'s not actually a hero. He\'s a friggin\' pirate. He robs people and stuff! Just look how he gets along with the other birds of the sea.", true], this, 10)
+				.call(writeDialogue, ["Welcome to the story.~DThis tale begins like many other tales, with a hero. Yes, the hero is a bird pirate. His name is Captain Squawkers. No, he\'s not actually a hero. He\'s a friggin\' pirate. He robs people and stuff! Just look how he gets along with the other birds of the sea.", true], this, 10)
 				.call(nextScene, [timeline.t2], this, 10);
-				//timeline.t1.progress(10); busy = false;//FOR TESTING			
-			
+				//timeline.t1.progress(10); busy = false;//FOR TESTING
+
 			timeline.t2
 				.pause()
 				.call(killDialogue, [], this)
@@ -92,7 +93,7 @@ $(document).ready(function() {
 				.call(writeComment, ["Hey, Mr. Bird! Sweet Ride!", $egret, $egret.width(), $egret.height()/9, "commentRight"], this , 7)
 				.call(writeComment, ["Why, thank you... I mean, ARR!! Ye shall surrender thy vessel!", $cpt, $cpt.width()*.36, $cpt.height()*.1, "commentLeft"], this , 9)
 				.call(aimCannon, [], this, 10)
-				.call(function() {$nextArrow.css({"left" : "40%", "bottom" : "33%"});}, [], this, 10)
+				.call(function() {$nextArrow.css({"left" : "36%", "bottom" : "28%"});}, [], this, 10)
 				.to($nextArrow, 1, {opacity : 1, ease: Power1.easeOut}, 10.1)
 				.call(function() {busy = false;}, [], this, 10);
 				//timeline.t2.progress(10); //FOR TESTING
@@ -101,22 +102,32 @@ $(document).ready(function() {
 				.pause()
 				.to($nextArrow, .5, {opacity : .01, ease: Power1.easeOut})
 				.to($cannonball, .6, {x : -windowWidth/2, ease: Power1.easeInOut}, 0)
-				.to($cannonContainer, .2, {x : cannonBallSize*2, y: cannonBallSize/2, ease: Power2.easeOut}, 0)				
+				.to($cannonContainer, .2, {x : cannonBallSize*2, y: cannonBallSize/2, ease: Power2.easeOut}, 0)
 				.to($speedboat, .6, {x : cannonBallSize, y: windowHeight/2, ease: Power1.easeOut}, .22)
 				.to($egret, .8, {x : -windowWidth, y: -windowHeight*1.5, rotation: 4000, ease: Power1.easeOut}, .22)
 				.call(function() {$body.unbind('click mousemove')}, [], this, 1.02)
-				.to($cannonBarrelContainer, .5, {rotation : 0, ease: Power2.easeOut}, 1.02)	
+				.to($cannonBarrelContainer, .5, {rotation : 0, ease: Power2.easeOut}, 1.02)
 				.call(writeDialogue, ["And thus, Captain Squawkers ruled the seas with an iron wing. Tyranical and menacing, he plundered any who crossed his path.~DBut, the parrot grew careless and sailed into a storm. He soon found himself staring death in the eye.", false], this, 1.02)
 				.to($stormCloud.left, 6, {x : windowWidth/2, ease:Power1.easeInOut}, 6)
 				.to($stormCloud.right, 6, {x : -windowWidth/2, ease:Power1.easeInOut}, 6)
 				.to($dusk, 3, {opacity : .8, ease:Power1.easeInOut}, 9)
-				.call(function() {timeline.t4.resume();}, [], this, 14);	
+				.call(function() {timeline.t4.resume();}, [], this, 14);
+				
 
 			timeline.t4
 				.pause()
 				.call(lightningStrike, ['flash1', '30%'], this, 0)
 				.call(lightningStrike, ['flash1', '30%'], this, 1)
-				.call(lightningStrike, ['flash2', '55%'], this, 3);
+				.call(lightningStrike, ['flash2', '55%'], this, 3)
+				.call(lightningStrike, ['flash1', '30%'], this, 4)
+				.call(lightningStrike, ['flash2', '55%'], this, 6)
+				.call(lightningStrike, ['flash1', '30%'], this, 7)
+				.call(lightningStrike, ['flash2', '55%'], this, 9)
+				.to($ship, 10, {y : $ship.height(), ease:Power1.easeInOut}, 3)
+				.to($ship, 1.5, {rotation : 10, ease:Power1.easeInOut}, 3)
+				.to($ship, 5, {rotation : -20, ease:Power1.easeInOut}, 4.5)
+				.call(killDialogue, [], this, 10)
+				.call(writeDialogue, ["And so concluded the beginning of the end, or the end of the beginning. Much is left to discover about the Captain, and the truth will emerge in time! Please check back in the distant future!!", false], this, 10);
 
 			function aimCannon() {
 				$body.click(function() { // Triggers binding of cannon rotation event
@@ -132,7 +143,7 @@ $(document).ready(function() {
 
 						//console.log('Origin: ' + mouseOrigin + " Current: " + currentY + " Degrees: " + degrees);
 						if(mouseOrigin === undefined)
-							mouseOrigin = currentY;						
+							mouseOrigin = currentY;
 
 						if(degrees < 50 && degrees > -60) {
 							$cannonBarrelContainer.css({
@@ -167,7 +178,7 @@ $(document).ready(function() {
 	}
 
 
-	//TO DO: If no other use case for rebind function, combine nextScene and rebind 
+	//TO DO: If no other use case for rebind function, combine nextScene and rebind
 	function nextScene(subscene) { rebind($body, 'click', subscene); }
 
 	function rebind(elem, eventType, func) {
@@ -178,7 +189,7 @@ $(document).ready(function() {
 					busy = true;
 					func.resume();
 				}
-		}); 
+		});
 	}
 
 	function getWindowSize() { windowHeight = $window.height(), windowWidth = $window.width(); }
@@ -202,7 +213,7 @@ $(document).ready(function() {
 	// Used to preload images before they need to be displayed
 	function preload() {
 		var images = new Array();
-		for (i = 0; i < preload.arguments.length; i++) {			
+		for (i = 0; i < preload.arguments.length; i++) {
 			images[i] = new Image();
 			images[i].src = preload.arguments[i];
 		}
@@ -219,32 +230,32 @@ $(document).ready(function() {
 
 		if(!$('.dialogue').length) {
 			$('body').append('<div class="cfix dialogue"></div>');
-			$dialogue = $('.dialogue');			
+			$dialogue = $('.dialogue');
 		}
 
 		if(charIndex < text.length) {
 			busy = true;
-			if(text[charIndex] === '~'){		
+			if(text[charIndex] === '~'){
 				switch(text[charIndex+=1]){
 					case 'B':
 						var specialChar = '<br>';
-						break; 						
+						break;
 					case 'D':
 						var specialChar = '<br><br>';
-						break;					
+						break;
 					default:
 						var specialChar = '~';
 						break;
 				}
 				$dialogue.html($dialogue.html() + specialChar);
-			} else { $dialogue.html($dialogue.html() + text[charIndex]); }			
+			} else { $dialogue.html($dialogue.html() + text[charIndex]); }
 
-			setTimeout(function(){ writeDialogue(text, arrow, ++charIndex) }, 40);		
-		} else { 
+			setTimeout(function(){ writeDialogue(text, arrow, ++charIndex) }, 40);
+		} else {
 			busy = false;
-			if(arrow) { 
+			if(arrow) {
 				var fadeInArrow = new TimelineMax().to($('#nextArrow'), 1, {opacity : .95, ease: Power1.easeOut});
 			}
 		}
-	}	
+	}
 });

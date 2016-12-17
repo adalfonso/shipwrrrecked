@@ -25,23 +25,23 @@ body {
 
 #howto h2 {
 	color: #2f69ad;
-	font-size: 128px;
+	font-size: 6em;
 	line-height:  1.2em;
 	margin: 1em 0 .25em 0;
 }
 
 #howto h3 {
 	color: #d7ad55;
-	font-size: 64px;
+	font-size: 4em;
 	line-height:  1.2em;
-	margin: .25em 0em 1em 0;
+	margin: .25em 0em .75em 0;
 }
 
 #howto p {
 	color: #281300;
-	font-size: 28px;
+	font-size: 1.8em;
 	line-height: 1.2em;
-	margin: 1em auto;
+	margin: .8em auto;
 	transition: .3s color ease-out;
 	width: 60%;
 }
@@ -69,8 +69,8 @@ body {
 .commentLeft, .commentRight {
     background: rgba(240,240,240,.9);
     box-sizing: border-box;
-    display: inline-block; 
-    font-size: .8em;   
+    display: inline-block;
+    font-size: .8em;
     margin-bottom: 15px;
     max-width: 300px;
     padding: 3px 10px;
@@ -95,12 +95,12 @@ body {
     z-index: 2200;
 }
 
-.commentLeft::after {	
+.commentLeft::after {
     border-width: 10px 0 10px 15px;
 	right: -15px;
 }
 
-.commentRight::after {	
+.commentRight::after {
     border-width: 10px 15px 10px 0;
 	left: -15px;
 }
@@ -124,7 +124,7 @@ body {
 	left: 45%;
 	opacity: .01;
 	position: fixed;
-	width: 10%;
+	width: 15%;
 	z-index: 110;
 }
 
@@ -228,7 +228,7 @@ body {
 	z-index: 23;
 }
 
-#lightningBolt{
+#lightningBolt {
 	position: fixed;
 	top: 18%;
 	width: 5%;
@@ -240,12 +240,12 @@ body {
 	background-size: cover;
 }
 
-#scene1 > .clouds {	
+#scene1 > .clouds {
 	background: url('../img/clouds.png') center center;
 	background-size: cover;
 	height: 100%;
 	position: fixed;
-	width: 100%;	
+	width: 100%;
 	z-index: 7;
 }
 
@@ -258,7 +258,7 @@ body {
 
 #shipContainer {
 	position: fixed;
-	width: 60%;	
+	width: 60%;
 	bottom: 22%;
 	right: -60%;
 	z-index: 15;
@@ -272,7 +272,7 @@ body {
 
 #speedboatContainer {
 	position: fixed;
-	width: 40%;	
+	width: 40%;
 	bottom: 22%;
 	left: -40%;
 	z-index: 25;
@@ -287,7 +287,9 @@ body {
 
 #stormCloudLeft {left: -100%;}
 
-#stormCloudRight{right: -100%;}
+#stormCloudRight {
+	right: -100%;
+}
 
 #sun {
 	border-radius: 100%;
@@ -320,4 +322,28 @@ body {
 #wave3 {
 	bottom: 15%;
 	z-index: 30;
+}
+
+@media (max-width: 1680px) and (min-width: 0px){
+	.dialogue {width: 33% !important}
+}
+
+@media (max-width: 1680px) and (min-width: 1440px){
+	body {font-size: 90% !important}
+}
+
+@media (max-width: 1440px) and (min-width: 1280px){
+	body {font-size: 80% !important}
+}
+
+@media (max-width: 1280px) and  (min-width: 960px){
+	body {font-size: 70% !important}
+}
+
+@media (max-width: 960px ) and (min-width: 800px){
+	body {font-size: 60% !important}
+}
+
+@media (max-width: 800px ) and (min-width: 0px){
+	body {font-size: 50% !important}
 }
